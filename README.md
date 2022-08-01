@@ -3,9 +3,9 @@ Project Name:
 Dippr
 
 Authors: 
-Nick Alberts
-Josef Berrios
-Shane Smith
+Nick Alberts, 
+Josef Berrios, 
+Shane Smith, 
 Sam Skinner
 
 Description:
