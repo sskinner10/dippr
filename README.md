@@ -1,24 +1,12 @@
 # README
+Project Name:
+Dippr
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Authors: 
+Nick Alberts
+Josef Berrios
+Shane Smith
+Sam Skinner
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Description:
+An application to find the ultimate dipping sauce by allowing users to add new sauces and submit reviews for them.
