@@ -15,3 +15,16 @@
  *= require foundation_and_overrides
 
  */
+
+.page-header-text {
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.form-label-text {
+    font-size: 1.1em;
+}
+
+.form-tile {
+    margin: 0% 10%;
+}
