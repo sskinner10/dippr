@@ -17,6 +17,7 @@ feature 'user registers', %Q{
 
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Dippr Handle', with: 'SauceBoss69'
+    attach_file :avatar, "#{Rails.root}/spec/support/images/photo.png"
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
 
