@@ -1,0 +1,10 @@
+<div class='grid-container'>
+  <div class='grid-x grid-margin-x grid-margin-y'>
+    <% @sauces.each do |sauce| %>
+      <div class='cell small-12 medium-4'>
+        <h3><%= sauce.name %> (<%= sauce.brand %>)</h3>
+        <%= image_tag sauce.image_url %>
+      </div>
+    <% end %>
+  </div>
+</div>
