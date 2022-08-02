@@ -1,0 +1,18 @@
+<h1>Add a new sauce:</h1> 
+
+<%= form_for @sauce do |f| %>
+  <%= f.label :name%>
+  <%= f.text_field :name %><br>
+  
+  <%= f.label :brand%>
+  <%= f.text_field :brand %><br>
+  
+  <%= f.label :image_url%>  
+  <%= f.text_field :image_url %><br>
+  
+  <%= f.label :description%>
+  <%= f.text_field :description %>
+  
+  <%= f.submit %>
+
+<% end %>
