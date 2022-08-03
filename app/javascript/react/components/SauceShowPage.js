@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import _ from 'lodash'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
@@ -21,21 +22,19 @@ const SauceShowPage = (props) => {
             console.error(`Error in fetch: ${error.message}`)
         }
     }
+
+    if (_.isEmpty(sauce)) {
+      return null
+    }
+
     return (
       <div className="grid-container">
         <div className="grid-x">
           <div className="cell small-12 medium-4"> 
             <img src={sauce.image_url} all={`${sauce.name} (${sauce.brand})`} />
-            <h5>{sauce.name} ({sauce.brand})</h5>
+            <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
             <p>{sauce.description}</p>
           </div>
-
-          <div className="cell small-12 medium-8">
-            <div>
-              <p>Reviews will go here</p>
-            </div>
-          </div>
-
         </div>
       </div>
     )
