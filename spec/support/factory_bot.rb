@@ -1,10 +1,12 @@
 require 'factory_bot'
+include ActionDispatch::TestProcess
+
 
 FactoryBot.define do
   factory :user do
     sequence(:email) {|n| "user#{n}@example.com" }
     dippr_handle { 'BigDipper' }
-    avatar { 'https://img.thrivemarket.com/store/full/6/7/671635704498-1.jpg?w=1200' }
+    avatar { fixture_file_upload("#{Rails.root}/spec/support/images/unicorn.jpeg", "image/jpeg") }
     password { 'password' }
     password_confirmation { 'password' }
   end
