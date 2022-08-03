@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_08_02_191445) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
+    t.string "avatar", null: false
     t.index ["dippr_handle"], name: "index_users_on_dippr_handle", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
