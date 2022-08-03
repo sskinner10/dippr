@@ -9,9 +9,19 @@
 <body>
   
   <nav class="top-bar">
-    <h1><a href="/">Dippr</a></h1>
 
-    <section class="top-bar-section">
+    <section class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-text">
+          <h1><a href="/">Dippr</a></h1>
+        </li>
+        <li>
+          <%= link_to 'Add New Sauce', new_sauce_path, class: "center-vertical-navbar" %>
+        </li>
+      </ul>
+    </section>
+
+    <section class="top-bar-right">
       <ul class="right">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
