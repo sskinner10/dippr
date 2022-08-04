@@ -12,4 +12,10 @@ Rails.application.routes.draw do
       resources :sauces, only: [:show]
     end 
   end 
+
+  namespace :api do
+    namespace :v1 do 
+      resources :reviews, only: [:show]
+    end 
+  end 
 end
