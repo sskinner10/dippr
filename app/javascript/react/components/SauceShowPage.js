@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
+import ReviewForm from './ReviewForm'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
@@ -34,6 +35,14 @@ const SauceShowPage = (props) => {
             <img src={sauce.image_url} all={`${sauce.name} (${sauce.brand})`} />
             <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
             <p>{sauce.description}</p>
+          </div>
+          <div> 
+            <ReviewForm setSauce = {setSauce} sauce = {sauce} />
+            <div>
+              <h1>
+              Review Tile goes here 
+              </h1>
+            </div>
           </div>
         </div>
       </div>
