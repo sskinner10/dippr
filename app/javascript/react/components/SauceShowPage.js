@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
-    
+
     useEffect(() => {
         fetchSauce()
     }, [])

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   resources :sauces, only: [:index, :new, :create]
 
-  get "/sauces/:id", to: "sauces#show"
+  get "/sauces/:id", to: "homes#index"
 
   namespace :api do
     namespace :v1 do 
