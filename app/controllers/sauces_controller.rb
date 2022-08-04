@@ -1,4 +1,7 @@
 class SaucesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  before_action :authorize_user, except: [:index, :new, :create]
+
   def index
     @sauces = Sauce.all
   end
@@ -19,7 +22,42 @@ class SaucesController < ApplicationController
     end
   end
 
+  def edit
+    @sauce = Sauce.find(params[:id])
+  end
+
+  def update
+    @sauce = Sauce.find(params[:id])
+
+    if @sauce.update(sauce_params)
+      flash[:notice] = "Sauce updated successfully"
+      redirect_to sauces_path
+    else
+      flash.now[:error] = @sauce.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def destroy
+    @sauce = Sauce.find(params[:id])
+
+    if @sauce.destroy
+      flash[:notice] = "Sauce obliterated. The sauce is lost."
+      redirect_to sauces_path
+    else
+      flash.now[:error] = "Unable to delete sauce"
+      render :edit
+    end
+
+  end
+
   private
+
+  def authorize_user
+    if !user_signed_in? || !current_user.admin?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 
   def sauce_params
     params.require(:sauce).permit(:name, :brand, :image_url, :description)

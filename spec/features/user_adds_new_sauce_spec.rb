@@ -2,6 +2,15 @@ require 'rails_helper'
 
 feature "when the user submits a new sauce" do
   scenario 'user successfully creates a new sauce' do
+    user = FactoryBot.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit new_sauce_path
 
     fill_in 'Name', with: 'Mustard'
@@ -17,6 +26,15 @@ feature "when the user submits a new sauce" do
   end
 
   scenario "user fails to add a new sauce" do
+    user = FactoryBot.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit new_sauce_path
     
     click_button 'Create Sauce'
