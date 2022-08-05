@@ -46,7 +46,7 @@ const SauceShowPage = (props) => {
       <div className="grid-container">
         <div className="grid-x">
           <div className="sauce-show-tile cell small-12 medium-4"> 
-            <img src={sauce.image_url} all={`${sauce.name} (${sauce.brand})`} />
+            <img src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
             <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
             <p>{sauce.description}</p>
           </div>
