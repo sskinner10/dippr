@@ -1,0 +1,25 @@
+<h1 class="page-header-text">Edit this sauce:</h1> 
+<div class="form-tile callout" >
+  <%= form_for @sauce do |f| %>
+    <%= f.label :name, class: "form-label-text" %>
+    <%= f.text_field :name %>
+  
+    <%= f.label :brand, class: "form-label-text" %>
+    <%= f.text_field :brand %>
+    
+    <%= f.label :image_url, "Image URL", class: "form-label-text" %>  
+    <%= f.text_field :image_url %>
+    
+    <%= f.label :description, class: "form-label-text" %>
+    <%= f.text_field :description %>
+    
+		<div class="button-group" >
+			<%= f.submit class: "button" %>
+			<%= link_to "Obliterate this Sauce", sauce_path(@sauce), method: "DELETE", class: "button delete-button" %>
+		</div>
+
+  <% end %>
+
+  <br>
+  <%= link_to 'Back to Sauces', sauces_path %>
+</div>

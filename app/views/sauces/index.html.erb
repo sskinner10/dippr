@@ -4,6 +4,11 @@
       <div class='cell small-12 medium-4'>
         <h3><%= link_to "#{sauce.name} (#{sauce.brand})", "/sauces/#{sauce.id}" %></h3>
         <%= image_tag sauce.image_url %>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= link_to "Edit Sauce", edit_sauce_path(sauce) %>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   </div>
