@@ -31,13 +31,13 @@ const SauceShowPage = (props) => {
     const reviewTiles = sauce.reviews.map((review)=>{
       return(
         <ReviewTile
-        key = {review.id}
-        id = {review.id}
-        title = {review.title}
-        rating = {review.rating}
-        heatIndex = {review.heatIndex}
-        body = {review.body}
-        createdAt = {review.created_at}
+          key={review.id}
+          id={review.id}
+          title={review.title}
+          rating={review.rating}
+          heatIndex={review.heatIndex}
+          body={review.body}
+          createdAt={review.created_at}
         />
       )  
     })

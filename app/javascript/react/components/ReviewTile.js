@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const ReviewTile = props =>{
 
   const dateString = new Date(props.createdAt).toDateString()
