@@ -21,3 +21,13 @@ FactoryBot.define do
     description { "a tasty, tomato based sauce" }
   end
 end
+
+FactoryBot.define do
+  factory :review do
+    title { "Delicious sauce" }
+    rating { 5 }
+    heatIndex { 0 }
+    body { "it's delicious." }
+    sauce
+  end
+end
