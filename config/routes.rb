@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   resources :sauces, only: [:index, :new, :create, :edit, :update, :destroy]
 
   get "/sauces/:id", to: "homes#index"
+  get "/users/:id", to: "homes#index"
 
   namespace :api do
     namespace :v1 do 
       resources :sauces, only: [:show]
+      resources :users, only: [:show]
     end 
   end 
 end
