@@ -43,20 +43,19 @@ const SauceShowPage = (props) => {
     if (_.isEmpty(sauce)) {
       return null
     }
-      // setReviews({title:"test", rating: 5, heatIndex:5, description:"test review"})
-    const reviewTiles = sauce.reviews.map((review)=>{
-      return(
-        <ReviewTile
-        key = {review.id}
-        id = {review.id}
-        title = {review.title}
-        rating = {review.rating}
-        heatIndex = {review.heatIndex}
-        description = {review.body}
-        />
-      )
-        
-    })
+     
+    // const reviewTiles = sauce.reviews.map((review)=>{
+    //   return(
+    //     <ReviewTile
+    //     key = {review.id}
+    //     id = {review.id}
+    //     title = {review.title}
+    //     rating = {review.rating}
+    //     heatIndex = {review.heatIndex}
+    //     description = {review.body}
+    //     />
+    //   )  
+    // })
 
     return (
       <div className="grid-container">
@@ -68,7 +67,7 @@ const SauceShowPage = (props) => {
           </div>
           <div>Review form
             <div>
-              {reviewTiles}
+              {/* {reviewTiles} */}
             </div>
           </div>
         </div>
