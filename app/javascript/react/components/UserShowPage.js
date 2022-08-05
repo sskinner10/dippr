@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
+
 const UserShowPage = (props) => {
     const [user, setUser] = useState({})
     
@@ -8,7 +9,7 @@ const UserShowPage = (props) => {
     }, [])
 
     const fetchUser = async () => {
-        try{
+        try {
             const response = await fetch(`/api/v1/users/${props.match.params.id}`)
             if (!response.ok){
                 const errorMessage = `${response.status} (${response.statusText})`
@@ -26,10 +27,10 @@ const UserShowPage = (props) => {
         return null
     }
 
-    const formatDate = () =>{
-        
+    const formatDate = () =>{    
         return new Date(user.created_at).toDateString()
     }
+
     return (
       <div className="grid-container">
         <div className="grid-x">
