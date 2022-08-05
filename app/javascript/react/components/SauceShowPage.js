@@ -4,7 +4,6 @@ import ReviewTile from './ReviewTile'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
-    // const [reviews, setReviews] = useState([])
   
     useEffect(() => {
         fetchSauce()
@@ -19,55 +18,41 @@ const SauceShowPage = (props) => {
           throw(error)
         }
         const sauceObject = await response.json()
-        setSauce(sauceObject)
+        setSauce(sauceObject.sauce)
       } catch (error) {
         console.error(`Error in fetch: ${error.message}`)
       }
     }
-
-    // const fetchReview = async () => {
-    //   try {
-    //     const response = await fetch(`/api/v1/reviews/${props.match.params.id}`)
-    //     if (!response.ok) {
-    //       const errorMessage = `${response.status} (${response.statusText})`
-    //       const error = new Error (errorMessage)
-    //       throw(error)
-    //     }
-    //     const ReviewObject = await response.json()
-    //     setReviews(ReviewObject)
-    //   } catch (error) {
-    //     console.error(`Error in fetch: ${error.message}`)
-    //   }
-    // }
     
     if (_.isEmpty(sauce)) {
       return null
     }
      
-    // const reviewTiles = sauce.reviews.map((review)=>{
-    //   return(
-    //     <ReviewTile
-    //     key = {review.id}
-    //     id = {review.id}
-    //     title = {review.title}
-    //     rating = {review.rating}
-    //     heatIndex = {review.heatIndex}
-    //     description = {review.body}
-    //     />
-    //   )  
-    // })
+    const reviewTiles = sauce.reviews.map((review)=>{
+      return(
+        <ReviewTile
+        key = {review.id}
+        id = {review.id}
+        title = {review.title}
+        rating = {review.rating}
+        heatIndex = {review.heatIndex}
+        body = {review.body}
+        createdAt = {review.created_at}
+        />
+      )  
+    })
 
     return (
       <div className="grid-container">
         <div className="grid-x">
-          <div className="cell small-12 medium-4"> 
+          <div className="sauce-show-tile cell small-12 medium-4"> 
             <img src={sauce.image_url} all={`${sauce.name} (${sauce.brand})`} />
             <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
             <p>{sauce.description}</p>
           </div>
-          <div>Review form
+          <div className='cell small-12 medium-8 large-7'>Review form
             <div>
-              {/* {reviewTiles} */}
+              {reviewTiles}
             </div>
           </div>
         </div>
