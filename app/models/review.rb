@@ -4,4 +4,13 @@ class Review < ApplicationRecord
   validates :heatIndex, numericality: { minimum: 0, maximum: 10 }
   
   belongs_to :sauce
+
+  has_many :votes
+  has_many :users, through: :votes
+
+  private 
+
+  def total_karma
+    self.votes.sum(:vote_type)
+  end
 end

@@ -6,6 +6,9 @@ class User < ApplicationRecord
   validates :dippr_handle, presence: true, uniqueness: true
   validates :avatar, presence: true
   validates :role, presence: true
+
+  has_many :votes
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
