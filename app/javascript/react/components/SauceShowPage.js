@@ -4,10 +4,10 @@ import ReviewTile from './ReviewTile'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
-    const [reactError, setReactError] = useState("")
-  
+    const [currentUser, setCurrentUser] = useState({})
+    
     useEffect(() => {
-        fetchSauce()
+      fetchSauce()
     }, [])
 
     const fetchSauce = async () => {
@@ -20,6 +20,10 @@ const SauceShowPage = (props) => {
         }
         const sauceObject = await response.json()
         setSauce(sauceObject.sauce)
+        
+        if (sauceObject.sauce.current_user) {
+          setCurrentUser(sauceObject.sauce.current_user)
+        }
       } catch (error) {
         console.error(`Error in fetch: ${error.message}`)
       }
@@ -29,32 +33,15 @@ const SauceShowPage = (props) => {
       return null
     }
 
-    const fetchKarma = async (payload) => {
-      try {
-        const response = await fetch(`/api/v1/votes`, {
-          credentials: "same-origin",
-          method: "POST",
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        })
-        if (!response.ok) {
-          const errorMessage = `${response.status} (${response.statusText})`
-          throw new Error(errorMessage)
-        }
-        const responseBody = await response.json()
-        // debugger
-        if (responseBody.error[0] === 'You need to be signed in first') {
-          // props.history.go("")
-        }
-      } catch (error) {
-        console.error(`Error in Fetch: ${error.message}`)
-      }
-    }
-     
     const reviewTiles = sauce.reviews.map((review)=>{
+      const hasUserVoted = review.votes.filter(vote => vote.user_id === currentUser.id)
+      
+      let currentUserVote = null
+      
+      if (hasUserVoted.length > 0) {
+        currentUserVote = hasUserVoted.at(0).vote_type
+      }
+      
       return(
         <ReviewTile
           key={review.id}
@@ -65,7 +52,7 @@ const SauceShowPage = (props) => {
           body={review.body}
           createdAt={review.created_at}
           totalKarma={review.total_karma}
-          fetchKarma={fetchKarma}
+          currentUserVote={currentUserVote}
         />
       )  
     })

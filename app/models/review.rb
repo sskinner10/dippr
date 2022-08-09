@@ -8,8 +8,6 @@ class Review < ApplicationRecord
   has_many :votes
   has_many :users, through: :votes
 
-  private 
-
   def total_karma
     self.votes.sum(:vote_type)
   end
