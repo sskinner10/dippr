@@ -1,12 +1,39 @@
 import React, { useState } from "react"
+import ErrorDisplay from "./ErrorDisplay"
 
 const ReviewForm = (props) => {
   const [newReview, setNewReview] = useState ({
     title:"",
     rating:"",
     heatIndex:"",
-    description:""
+    body:""
   })
+  const [errors, setErrors] = useState({})
+
+  const postReview = async (formData) =>{
+    
+    try{
+      const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews`, {
+        credentials: "same-origin",
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({review: formData})
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.status.text})`
+        const error = new Error(errorMessage)
+        throw(error)
+      }
+      const reviewObject = await response.json()
+      appendNewReview(reviewObject.review)
+
+    } catch(error) {
+      console.log(`Error in fetch: ${error}`)
+    }
+  }
 
   const handleChange = (event) => {
     setNewReview ({
@@ -15,20 +42,50 @@ const ReviewForm = (props) => {
     })
   }
 
+  const validForSubmission = () => {
+    let submitErrors = {}
+    const requiredFields = ["title", "rating", "heatIndex", "body"]
+    requiredFields.forEach(field => {
+      if (newReview[field].trim() == "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "cannot be blank"
+        }
+      }
+      setErrors(submitErrors)
+    })
+    return errors
+  }
+
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    props.addNewReview(newReview)
+    
+    if (validForSubmission()) {
+      postReview(newReview)
+      setNewReview ({
+        title:"",
+        rating:"",
+        heatIndex:"",
+        body:""
+      })
+    }
+  }
 
-    setNewReview ({
-      title:"",
-      rating:"",
-      heatIndex:"",
-      description:""
-    })
+  const appendNewReview = (reviewPayload) => {
+    const newReviews = props.sauce.reviews
+    newReviews.push(reviewPayload)
+    const sauceWithNewReview = {
+      ...props.sauce,
+      reviews: newReviews
+    }
+    props.setSauce(sauceWithNewReview)
   }
 
   return (
     <form className="new-review-form" onSubmit={handleFormSubmit}>
+      <ErrorDisplay 
+        errors={errors}
+      />
       <label> Title:
         <input
           name="title"
@@ -42,7 +99,10 @@ const ReviewForm = (props) => {
         <input 
           name="rating"
           id="rating"
-          type="integer"
+          type="number"
+          min="1"
+          max="5"
+          step="1"
           onChange={handleChange}
           value={newReview.rating}
         />
@@ -51,18 +111,21 @@ const ReviewForm = (props) => {
         <input 
           name="heatIndex"
           id="heatIndex"
-          type="integer"
+          type="number"
+          min="0"
+          max="10"
+          step="1"
           onChange={handleChange}
           value={newReview.heatIndex}
         />
       </label>
-      <label> Description:
+      <label> body:
         <input 
-          name="description"
-          id="description"
+          name="body"
+          id="body"
           type="text"
           onChange={handleChange}
-          value={newReview.description}
+          value={newReview.body}
         />
       </label>
   

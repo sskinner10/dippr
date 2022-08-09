@@ -4,8 +4,9 @@ const ReviewTileContainer = (props) => {
   const [review, setReview] = useState({})
     const getReviews = async () => {
       const reviewId = props.match.params.id
+      binding.pry
       try {
-        const response = await fetch(`/api/v1/reviews/${reviewId}`)
+        const response = await fetch(`/api/v1/sauces/${reviewId}`)
         if (!response.ok) {
           const errorMessage = `${response.status} ${response.statusText}`
           const error = new Error(errorMessage)

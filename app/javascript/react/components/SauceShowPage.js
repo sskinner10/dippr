@@ -29,7 +29,7 @@ const SauceShowPage = (props) => {
       return null
     }
      
-    const reviewTiles = sauce.reviews.map((review)=>{
+    const reviewTiles = sauce.reviews.reverse().map((review)=>{
       return(
         <ReviewTile
           key={review.id}
@@ -42,7 +42,7 @@ const SauceShowPage = (props) => {
         />
       )  
     })
-
+    
     return(
       <div className="grid-container">
         <div className="grid-x">
@@ -60,7 +60,7 @@ const SauceShowPage = (props) => {
             
             <div className='cell small-12 medium-8 large-7'>Review form
               <div>
-                {reviewTiles}
+                {reviewTiles}          
               </div>
             </div>
           </div>
