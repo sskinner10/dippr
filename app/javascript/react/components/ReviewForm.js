@@ -12,7 +12,7 @@ const ReviewForm = (props) => {
 
   const postReview = async (formData) =>{
     
-    try{
+    try {
       const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews`, {
         credentials: "same-origin",
         method: "POST",
@@ -28,7 +28,10 @@ const ReviewForm = (props) => {
         throw(error)
       }
       const reviewObject = await response.json()
-      appendNewReview(reviewObject.review)
+      if (reviewObject.review) {
+        setLoginWarning(false)
+        appendNewReview(reviewObject.review)
+      }
 
     } catch(error) {
       console.log(`Error in fetch: ${error}`)
@@ -74,11 +77,10 @@ const ReviewForm = (props) => {
   const appendNewReview = (reviewPayload) => {
     const newReviews = props.sauce.reviews
     newReviews.push(reviewPayload)
-    const sauceWithNewReview = {
+    props.setSauce({
       ...props.sauce,
       reviews: newReviews
-    }
-    props.setSauce(sauceWithNewReview)
+    })
   }
 
   return (

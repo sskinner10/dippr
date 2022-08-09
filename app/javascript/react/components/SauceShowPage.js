@@ -29,7 +29,7 @@ const SauceShowPage = (props) => {
       return null
     }
      
-    const reviewTiles = sauce.reviews.reverse().map((review)=>{
+    const reviewTiles = sauce.reviews.map( (review) => {
       return(
         <ReviewTile
           key={review.id}

@@ -16,10 +16,4 @@ Rails.application.routes.draw do
       resources :users, only: [:show]
     end 
   end 
-
- 
-  #   namespace :v1 do 
-  #     resources :reviews, only: [:show]
-  #   end 
-  # end 
 end
