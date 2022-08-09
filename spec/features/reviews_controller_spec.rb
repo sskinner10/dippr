@@ -6,7 +6,10 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
     
     it "returns JSON of new review" do 
       ketchup = FactoryBot.create(:sauce)
-      review = FactoryBot.create(:review, sauce: ketchup)
+      user = FactoryBot.create(:user)
+      review = FactoryBot.create(:review, sauce: ketchup, user: user)
+
+      sign_in user
 
       post_json = {
         title: review.title, 
