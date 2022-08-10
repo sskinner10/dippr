@@ -8,7 +8,7 @@ RSpec.describe Api::V1::VotesController, type: :controller do
 
     let(:user) { FactoryBot.create(:user) }
     let(:sauce) { FactoryBot.create(:sauce) }
-    let(:review) { FactoryBot.create(:review, sauce: sauce) }
+    let(:review) { FactoryBot.create(:review, sauce: sauce, user: user) }
 
     it "adds a new vote to a review" do
       post_json = {
