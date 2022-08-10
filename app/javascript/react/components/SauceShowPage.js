@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
+import ReviewForm from './ReviewForm'
 import ReviewTile from './ReviewTile'
 
 const SauceShowPage = (props) => {
@@ -28,7 +29,7 @@ const SauceShowPage = (props) => {
       return null
     }
      
-    const reviewTiles = sauce.reviews.map((review)=>{
+    const reviewTiles = sauce.reviews.map( (review) => {
       return(
         <ReviewTile
           key={review.id}
@@ -41,23 +42,32 @@ const SauceShowPage = (props) => {
         />
       )  
     })
-
-    return (
+    
+    return(
       <div className="grid-container">
         <div className="grid-x">
+          
           <div className="sauce-show-tile cell small-12 medium-4"> 
             <img src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
             <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
             <p>{sauce.description}</p>
           </div>
-          <div className='cell small-12 medium-8 large-7'>Review form
-            <div>
-              {reviewTiles}
+          
+          <div className='reviews-index-tile cell small-12 medium-8'>
+            <div> 
+              <ReviewForm setSauce={setSauce} sauce={sauce} />
+            </div>
+            
+            <div className='cell small-12 medium-8 large-7'>Review form
+              <div>
+                {reviewTiles}          
+              </div>
             </div>
           </div>
         </div>
       </div>
     )
 }
+    
 
 export default SauceShowPage

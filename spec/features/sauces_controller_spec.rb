@@ -4,9 +4,10 @@ RSpec.describe Api::V1::SaucesController, type: :controller do
   describe "GET#show" do 
     it "should return a sauce object" do 
       ketchup = FactoryBot.create(:sauce)
-      review = FactoryBot.create(:review, sauce: ketchup)
+      user = FactoryBot.create(:user)
+      review = FactoryBot.create(:review, sauce: ketchup, user: user)
 
-      get :show, params: {id: ketchup.id}
+      get :show, params: {id: ketchup.id, user: user}
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
