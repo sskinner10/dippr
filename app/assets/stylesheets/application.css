@@ -36,9 +36,23 @@
 }
 
 .center-vertical-navbar {
- margin-top: 2em;
+    margin-top: 2em;
 }
 
 .sauce-title-text {
     text-align: center;
+}
+
+.vote-arrows {
+    margin-top: 0.25em;
+    border: 1px solid black;
+    border-radius: 1em;
+}
+
+.upvote-selected {
+    background-color: #15cb15;
+}
+
+.downvote-selected {
+    background-color: #d71414;
 }

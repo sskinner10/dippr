@@ -5,9 +5,10 @@ import ReviewTile from './ReviewTile'
 
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
-  
+    const [currentUser, setCurrentUser] = useState({})
+    
     useEffect(() => {
-        fetchSauce()
+      fetchSauce()
     }, [])
 
     const fetchSauce = async () => {
@@ -20,6 +21,10 @@ const SauceShowPage = (props) => {
         }
         const sauceObject = await response.json()
         setSauce(sauceObject.sauce)
+        
+        if (sauceObject.sauce.current_user) {
+          setCurrentUser(sauceObject.sauce.current_user)
+        }
       } catch (error) {
         console.error(`Error in fetch: ${error.message}`)
       }
@@ -28,8 +33,16 @@ const SauceShowPage = (props) => {
     if (_.isEmpty(sauce)) {
       return null
     }
-     
-    const reviewTiles = sauce.reviews.map( (review) => {
+
+    const reviewTiles = sauce.reviews.map((review)=>{
+      const hasUserVoted = review.votes.filter(vote => vote.user_id === currentUser.id)
+      
+      let currentUserVote = null
+      
+      if (hasUserVoted.length > 0) {
+        currentUserVote = hasUserVoted.at(0).vote_type
+      }
+      
       return(
         <ReviewTile
           key={review.id}
@@ -39,6 +52,8 @@ const SauceShowPage = (props) => {
           heatIndex={review.heatIndex}
           body={review.body}
           createdAt={review.created_at}
+          totalKarma={review.total_karma}
+          currentUserVote={currentUserVote}
         />
       )  
     })

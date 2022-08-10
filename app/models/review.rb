@@ -6,4 +6,11 @@ class Review < ApplicationRecord
   
   belongs_to :sauce
   belongs_to :user
+
+  has_many :votes
+  has_many :users, through: :votes
+
+  def total_karma
+    self.votes.sum(:vote_type)
+  end
 end
