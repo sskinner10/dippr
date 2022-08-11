@@ -100,6 +100,12 @@
     text-align: center;
 }
 
+
+.sauce-index-cell:hover {
+    border: solid #ae210b;
+    border-width: 1px;
+}
+
 .sauce-show-container {
     margin-top: 1em;
 }
