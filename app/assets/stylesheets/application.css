@@ -19,10 +19,16 @@
 .page-header-text {
     text-align: center;
     margin-top: 0.5em;
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
 }
 
 .form-label-text {
     font-size: 1.1em;
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
 }
 
 .form-tile {
@@ -35,12 +41,27 @@
     height: 300px;
 }
 
+.user-avatar-small {
+    object-fit: cover;
+    width: 75px;
+    height: 75px;
+    border-radius: 5%;
+}
+
+.review-poster-avatar {
+    margin-bottom:2.5%;
+    margin-right: 1%;
+}
+
 .center-vertical-navbar {
     margin-top: 2em;
 }
 
 .sauce-title-text {
     text-align: center;
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
 }
 
 .vote-arrows {
@@ -50,9 +71,112 @@
 }
 
 .upvote-selected {
-    background-color: #15cb15;
+    background-color: #60c860;
 }
 
 .downvote-selected {
-    background-color: #d71414;
+    background-color: #ce0f0f;
 }
+
+.sauce-index-grid {
+    margin-top: 1em;
+    margin: 0%, 5%;
+}
+
+.sauce-index-cell {
+    text-align: center;
+}
+
+.sauce-show-container {
+    margin-top: 1em;
+}
+
+.sauce-card-image {
+    object-fit: cover;
+    width: 100%;
+    height: 350px;
+    border-radius: 5%;
+}
+
+.now-font {
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.sauce-card-title {
+    text-align: center;
+    font-size: 1.45rem;
+}
+
+.sauce-card-subtitle {
+    text-align: center;
+    font-size: 1.35rem;
+}
+
+.sauce-show-image {
+    max-height: 30em;
+    border: solid #ae210b 1px;
+    border-radius: 5%;
+}
+
+.sauce-show-description-container {
+    text-align: left;
+}
+
+.sauce-show-image-wrapper {
+    text-align: center;
+}
+
+.reviews-index-tile {
+    padding-left: 1em;
+    border-left: 1px solid #461212;
+}
+
+.review-poster-handle {
+    font-style: italic;
+    margin-bottom: 1px;
+}
+
+.ketchup-text {
+    color: #ae210b;
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ketchup {
+    background-color: #ae210b;
+}
+
+.mayo-text {
+    color: #fff7e0;
+    font-family: 'NowRegular';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mayo {
+    background-color: #fff7e0;
+}
+
+.napkin {
+    background-color: #e3c9a9;
+}
+
+.top-bar-appname {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.align-right {
+    text-align: right;
+}
+/* 
+.top-bar-right {
+    max-width: 10%;
+}
+
+.top-bar-left {
+    max-width: 10%;
+} */

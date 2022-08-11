@@ -2,10 +2,6 @@ class Api::V1::ReviewsController < ApiController
   protect_from_forgery unless: -> {request.format.json? }
   before_action :authenticate_user!, except: [:show]
 
-  def show 
-    render json: review.all
-  end
-
   def create
     review = Review.new(review_params)
     review.sauce_id = params[:sauce_id]

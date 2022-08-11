@@ -6,6 +6,7 @@ import ReviewTile from './ReviewTile'
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
     const [currentUser, setCurrentUser] = useState({})
+    const [reviewFormExpanded, setReviewFormExpanded] = useState(false)
     
     useEffect(() => {
       fetchSauce()
@@ -47,6 +48,8 @@ const SauceShowPage = (props) => {
         <ReviewTile
           key={review.id}
           id={review.id}
+          userAvatar={review.user.avatar.url}
+          userHandle={review.user.dippr_handle}
           title={review.title}
           rating={review.rating}
           heatIndex={review.heatIndex}
@@ -57,23 +60,48 @@ const SauceShowPage = (props) => {
         />
       )  
     })
+
+    let sauceDescription = sauce.description
+    if (sauceDescription == "") {
+      sauceDescription = "No description provided"
+    }
+
+    const reviewFormShowing = () => {
+      if (reviewFormExpanded) {
+        return (
+          <ReviewForm setSauce={setSauce} sauce={sauce} setReviewFormExpanded={setReviewFormExpanded} />
+        )
+      } else {
+        return (
+          <div className='button alert expanded' onClick={expandForm}> Leave a Review for this Sauce </div>
+        )
+      }
+    }
+
+    const expandForm = () => {
+      setReviewFormExpanded(true)
+    }
     
     return(
       <div className="grid-container">
-        <div className="grid-x">
+        <div className="sauce-show-container grid-x grid-margin-x">
           
-          <div className="sauce-show-tile cell small-12 medium-4"> 
-            <img src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
-            <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
-            <p>{sauce.description}</p>
+          <div className="now-font sauce-show-tile cell small-12 medium-4"> 
+            <div className='sauce-show-image-wrapper' >
+              <img className="sauce-show-image" src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
+            </div>
+            <h3 className="now-font sauce-card-title" > {sauce.name} </h3>
+            <h4 className="now-font sauce-card-subtitle" > ({sauce.brand}) </h4>
+        
+            <p className='sauce-show-description-container callout'>{sauceDescription}</p>
           </div>
           
           <div className='reviews-index-tile cell small-12 medium-8'>
             <div> 
-              <ReviewForm setSauce={setSauce} sauce={sauce} />
+              {reviewFormShowing()}
             </div>
             
-            <div className='cell small-12 medium-8 large-7'>Review form
+            <div className='cell small-12 medium-8 large-7'>
               <div>
                 {reviewTiles}          
               </div>

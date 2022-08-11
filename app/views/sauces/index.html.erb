@@ -1,15 +1,21 @@
 <div class='grid-container'>
-  <div class='grid-x grid-margin-x grid-margin-y'>
+  <div class='sauce-index-grid grid-x grid-margin-x grid-margin-y'>
+
     <% @sauces.each do |sauce| %>
-      <div class='cell small-12 medium-4'>
-        <h3><%= link_to "#{sauce.name} (#{sauce.brand})", "/sauces/#{sauce.id}" %></h3>
-        <%= image_tag sauce.image_url %>
+
+      <div class='sauce-index-cell callout cell small-12 medium-6 large-4'>
+        <%= image_tag sauce.image_url, class: "sauce-card-image" %>
+        <h3 class="sauce-card-title" ><%= link_to "#{sauce.name}", "/sauces/#{sauce.id}", class: "ketchup-text" %></h3>
+        <h4 class="sauce-card-subtitle" > <%= link_to "(#{sauce.brand})", "/sauces/#{sauce.id}", class: "ketchup-text" %> </h4>
+        <p><%= sauce.average_rating_text %></p>
         <% if user_signed_in? %>
           <% if current_user.admin? %>
-            <%= link_to "Edit Sauce", edit_sauce_path(sauce) %>
+            <%= link_to "Edit Sauce", edit_sauce_path(sauce), class: "button expanded alert" %>
           <% end %>
         <% end %>
       </div>
+
     <% end %>
+
   </div>
 </div>

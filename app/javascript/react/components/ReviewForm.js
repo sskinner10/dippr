@@ -29,7 +29,6 @@ const ReviewForm = (props) => {
       }
       const reviewObject = await response.json()
       if (reviewObject.review) {
-        setLoginWarning(false)
         appendNewReview(reviewObject.review)
       }
 
@@ -81,6 +80,11 @@ const ReviewForm = (props) => {
       ...props.sauce,
       reviews: newReviews
     })
+    props.setReviewFormExpanded(false)
+  }
+
+  const closeForm = () => {
+    props.setReviewFormExpanded(false)
   }
 
   return (
@@ -97,30 +101,32 @@ const ReviewForm = (props) => {
           value={newReview.title}
         />
       </label>
-      <label> Rating:
-        <input 
-          name="rating"
-          id="rating"
-          type="number"
-          min="1"
-          max="5"
-          step="1"
-          onChange={handleChange}
-          value={newReview.rating}
-        />
-      </label>
-      <label> Heat Index:
-        <input 
-          name="heatIndex"
-          id="heatIndex"
-          type="number"
-          min="0"
-          max="10"
-          step="1"
-          onChange={handleChange}
-          value={newReview.heatIndex}
-        />
-      </label>
+      <div className="grid-x grid-margin-x" >
+        <label className="cell small-6" > Rating:
+          <input 
+            name="rating"
+            id="rating"
+            type="number"
+            min="1"
+            max="5"
+            step="1"
+            onChange={handleChange}
+            value={newReview.rating}
+          />
+        </label>
+        <label className="cell small-6" > Heat Index:
+          <input 
+            name="heatIndex"
+            id="heatIndex"
+            type="number"
+            min="0"
+            max="10"
+            step="1"
+            onChange={handleChange}
+            value={newReview.heatIndex}
+          />
+        </label>
+      </div>
       <label> body:
         <input 
           name="body"
@@ -132,7 +138,8 @@ const ReviewForm = (props) => {
       </label>
   
       <div className="button-group">
-        <input className="button" type="submit" value="Submit Review" />
+        <input className="button success" type="submit" value="Submit Review" />
+        <div className="button alert" onClick={closeForm} > Close Form </div>
       </div>
     </form>
   )
