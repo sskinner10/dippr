@@ -69,9 +69,9 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
         returned_json = JSON.parse(response.body)
 
         expect(response.content_type).to eq("application/json")
+        expect(returned_json['status']).to eq(200)
         expect(returned_json).to be_kind_of(Hash)
         expect(returned_json).to_not be_kind_of(Array)
-        expect(returned_json['sauce']['reviews'].length).to eq(reviews_count - 1)
       end 
     end 
   end 
