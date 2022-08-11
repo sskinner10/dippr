@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 import _ from "lodash";
+import ReviewTile from "./ReviewTile";
 
 const UserShowPage = (props) => {
     const [user, setUser] = useState({})
@@ -17,7 +19,7 @@ const UserShowPage = (props) => {
                 throw(error)
             }
             const userObject = await response.json()
-            setUser(userObject)
+            setUser(userObject.user)
         } catch (error){
             console.error(`Error in fetch: ${error.message}`)
         }
@@ -31,14 +33,58 @@ const UserShowPage = (props) => {
         return new Date(user.created_at).toDateString()
     }
 
+    const setSauce = (sauce) => {
+      console.log(sauce)
+    }
+
+    const reviewTiles = user.reviews.map((review)=>{
+
+      const hasUserVoted = review.votes.filter(vote => vote.user_id === user.id)
+      
+      let currentUserVote = null
+      
+      if (hasUserVoted.length > 0) {
+        currentUserVote = hasUserVoted.at(0).vote_type
+      }
+      
+      return(
+        <div className="review-tile">
+          <p className='now-font'> Review left at <Link className="ketchup-text" to={`/sauces/${review.sauce_id}`} > {review.my_sauce.name} </Link>. </p>
+          <ReviewTile
+            key={review.id}
+            id={review.id}
+            userAvatar={review.user.avatar.url}
+            userHandle={review.user.dippr_handle}
+            reviewUserId={review.user_id}
+            title={review.title}
+            rating={review.rating}
+            heatIndex={review.heatIndex}
+            body={review.body}
+            createdAt={review.created_at}
+            totalKarma={review.total_karma}
+            currentUserVote={currentUserVote}
+            currentUser={user}
+            sauce={review.my_sauce}
+            setSauce={setSauce}
+          />
+        </div>
+      )  
+    })
+
     return (
-      <div className="grid-container">
+      <div className="user-profile-tile callout grid-container">
         <div className="grid-x">
+
           <div className="cell small-12 medium-4">
-            <img src={user.avatar.url} alt= {`${user.dippr_handle}`} />
+            <img src={user.avatar.url} alt= {`${user.dippr_handle}`} className="user-avatar-large" />
             <h4 className="sauce-title-text">{user.dippr_handle}</h4>
             <p className="sauce-title-text">Dipping since {formatDate()}</p>
           </div>
+
+          <div className="cell small-12 medium-8">
+            {reviewTiles}
+          </div>
+
         </div>
       </div>
     )

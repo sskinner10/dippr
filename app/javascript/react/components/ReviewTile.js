@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
@@ -122,22 +123,20 @@ const ReviewTile = props =>{
     <div className="review-tile callout now-font napkin">
       <div className="grid-x">
         <div className="cell small-3 medium-2 review-poster-avatar" >
-          <img className="user-avatar-small" src={`${props.userAvatar}`} />
-        </div>
-        <div className="grid-x" >
-          <h5 className="cell small-6 medium-4 review-tile-rating-text" > {`Rating: ${props.rating}/5`}</h5>
-          <h5 className="cell small-6 medium-4 review-tile-rating-text" >{`Heat Index: ${props.heatIndex}/10`}</h5>
+          <Link to={`/users/${props.reviewUserId}`} >
+            <img className="user-avatar-small" src={`${props.userAvatar}`} />
+          </Link>
         </div>
         <div className="cell auto " >
           <h3 className="review-tile-title-text now-font"><strong>{props.title}</strong></h3>
           <div className="grid-x" >
-            <h5 className="cell small-6 medium-5 now-font" > {`Rating: ${props.rating}/5`}</h5>
-            <h5 className="cell auto now-font" >{`Heat Index: ${props.heatIndex}/10`}</h5>
+            <h5 className="cell small-12 medium-6 now-font scoring-cell" > {`Rating: ${props.rating}/5`}</h5>
+            <h5 className="cell small-12 medium-6 now-font scoring-cell" >{`Heat Index: ${props.heatIndex}/10`}</h5>
           </div>
           </div>
       </div>
       <div className="callout review-body review-body-text" >
-        <p className="review-poster-handle" > @{props.userHandle} writes: </p>
+        <p className="review-poster-handle" > <Link to={`/users/${props.reviewUserId}`} className="ketchup-text" ><i> @{props.userHandle} </i></Link>writes: </p>
         <p >{props.body}</p>
       </div>
       <div>

@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   resources :sauces, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :user
 
   get "/sauces/:id", to: "homes#index"
   get "/users/:id", to: "homes#index"
+  get "/users/:id/edit", to: "devise/registrations#edit"
 
   namespace :api do
     namespace :v1 do 

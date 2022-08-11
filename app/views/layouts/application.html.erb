@@ -9,34 +9,39 @@
   <script src="https://kit.fontawesome.com/54a2300b8c.js" crossorigin="anonymous"></script>
 </head>
 <body class="mayo" >
+  <div>
 
-  <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
-    <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
-    <div class="title-bar-title">Menu</div>
-  </div>
-
-  <div class="top-bar grid-x" id="responsive-menu">
-    <div class="cell auto grid-container top-bar-left">
-        <a href="/" class="mayo-text top-bar-appname" ><strong>Dippr</strong></a>
+    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+      <div class="title-bar-title">Menu</div>
     </div>
-    <div class="cell medium-9 large-8 topbar-user-section top-bar-right grid-container">
-      <div class="grid-x grid-padding-x grid-margin-x right ketchup">
-        <%- if current_user -%>
-          <div class="cell medium-5 large-6 align-right" >
-            <%= link_to 'Add New Sauce +', new_sauce_path, class: "mayo-text align-right" %>
-          </div>
-          <div class="cell small-1 mayo-text"> || </div>
-          <div class="cell auto text-right" ><%= link_to "#{current_user.dippr_handle}", "/users/#{current_user.id}", class: "mayo-text ketchup text-right" %></div>
-          <div class="cell small-1 text-center mayo-text" > / </div>
-          <div class="cell auto text-left" ><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "mayo-text ketchup" %></div>
-        <%- else -%>
-          <div class="cell auto text-right" ><%= link_to 'Sign Up', new_user_registration_path, class: "mayo-text ketchup text-right" %></div>
-          <div class="cell small-1 text-center" > / </div>
-          <div class="cell auto text-left" ><%= link_to 'Sign In', new_user_session_path, class: "mayo-text ketchup" %></div>
-        <%- end -%>
+
+    <div class="top-bar grid-x" id="responsive-menu">
+
+      <div class="cell small-5 medium-8">
+
+        <a href="/" class="mayo-text top-bar-appname top-bar-user-text" >Dippr</a>
+
       </div>
+
+      <div class="cell small-7 medium-4 topbar-user-section grid-container">
+        
+        <div class="grid-x grid-margin-x right ketchup">
+          
+          <%- if current_user -%>
+            <div class="cell auto text-right top-bar-user-text" ><%= link_to "#{current_user.dippr_handle}", "/users/#{current_user.id}", class: "mayo-text ketchup text-right" %></div>
+            <div class="cell small-1 text-center mayo-text top-bar-user-text" > <%=" / "%> </div>
+            <div class="cell auto text-left top-bar-user-text" ><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "mayo-text ketchup text-left" %></div>
+          <%- else -%>
+            <div class="cell auto text-right top-bar-user-text" ><%= link_to 'Sign Up', new_user_registration_path, class: "mayo-text ketchup text-right" %></div>
+            <div class="cell small-1 text-center mayo-text top-bar-user-text" > <%=" / "%> </div>
+            <div class="cell auto text-left top-bar-user-text" ><%= link_to 'Sign In', new_user_session_path, class: "mayo-text ketchup" %></div>
+          <%- end -%>
+        </div>
+
+      </div>
+
     </div>
-  </div>
 
   <%- flash.each do |key, value| -%>
     <div class="flash callout alert flash-<%= key %>">
