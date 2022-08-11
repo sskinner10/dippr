@@ -78,7 +78,9 @@ const SauceShowPage = (props) => {
         )
       } else {
         return (
-          <div className='button alert expanded' onClick={expandForm}> Leave a Review for this Sauce </div>
+          <div className='new-review-button'>
+            <div className='button secondary expanded rounded' onClick={expandForm}> Leave a Review for this Sauce </div>
+          </div>
         )
       }
     }
@@ -95,18 +97,20 @@ const SauceShowPage = (props) => {
             <div className='sauce-show-image-wrapper' >
               <img className="sauce-show-image" src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
             </div>
-            <h3 className="now-font sauce-card-title" > {sauce.name} </h3>
-            <h4 className="now-font sauce-card-subtitle" > ({sauce.brand}) </h4>
+            <h3 className="now-font sauce-card-title ketchup-text" ><strong> {sauce.name} </strong></h3>
+            <h4 className="now-font sauce-card-subtitle ketchup-text" ><strong> ({sauce.brand}) </strong></h4>
         
             <p className='sauce-show-description-container callout'>{sauceDescription}</p>
           </div>
           
           <div className='reviews-index-tile cell small-12 medium-8'>
+            <hr/>
             <div> 
               {reviewFormShowing()}
             </div>
-            
+            <hr></hr>
             <div className='cell small-12 medium-8 large-7'>
+              <h3 className='now-font'> Reviews: </h3>
               <div>
                 {reviewTiles}          
               </div>

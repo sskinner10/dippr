@@ -48,7 +48,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Update" %>
+      <%= f.submit "Update", class: "button secondary" %>
     </div>
   <% end %>
 </div>
@@ -59,4 +59,6 @@
   <p>Can't take the heat? <%= button_to "Get out of the kitchen", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 </div>
 
-<%= link_to "Back", :back, class: "button" %>
+<div class="center" >
+  <%= link_to "Back", :back, class: "button secondary text-center" %>
+</div>

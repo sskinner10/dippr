@@ -1,25 +1,29 @@
 <div class='grid-container'>
 
-  <div class="callout new-sauce-button" >
+  <div class=" new-sauce-button" >
     <h2 class="now-font text-center" > Welcome to <strong>Dippr</strong> </h2>
     <p class="now-font text-center"> A place for sauce enthusiasts to share their love for sauces, dips, and dressings.</p>
-    <%= link_to '+ Add New Sauce', new_sauce_path, class: "button expanded mayo-text accent" %>
+    <div class="button-wrapper" >
+      <%= link_to '+ Add New Sauce', new_sauce_path, class: "button expanded mayo-text secondary" %>
+    </div>
   </div>
 
   <div class='sauce-index-grid grid-x grid-margin-x grid-margin-y'>
 
     <% @sauces.each do |sauce| %>
 
-      <div class='sauce-index-cell callout cell small-12 medium-6 large-4'>
-        <%= image_tag sauce.image_url, class: "sauce-card-image" %>
-        <h3 class="sauce-card-title" ><%= link_to "#{sauce.name}", "/sauces/#{sauce.id}", class: "ketchup-text" %></h3>
-        <h4 class="ketchup-text sauce-card-subtitle" > (<%= sauce.brand %>) </h4>
-        <p class="now-font" ><%= sauce.average_rating_text %></p>
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            <%= link_to "Edit Sauce", edit_sauce_path(sauce), class: "button expanded alert" %>
+      <div class='sauce-index-cell callout cell small-12 medium-6 large-4 napkin'>
+        <a href=<%="/sauces/#{sauce.id}"%>>
+          <%= image_tag sauce.image_url, class: "sauce-card-image" %>
+          <h3 class="sauce-card-title ketchup-text" > <strong><%= sauce.name %></strong> </h3>
+          <h4 class="ketchup-text sauce-card-title" > (<%= sauce.brand %>) </h4>
+          <p class="now-font ketchup-text" ><%= sauce.average_rating_text %></p>
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= link_to "Edit Sauce", edit_sauce_path(sauce), class: "button expanded alert" %>
+            <% end %>
           <% end %>
-        <% end %>
+        </a>
       </div>
 
     <% end %>

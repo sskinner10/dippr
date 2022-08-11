@@ -94,7 +94,7 @@ const ReviewForm = (props) => {
   }
 
   return (
-    <form className="new-review-form" onSubmit={handleFormSubmit}>
+    <form className="callout napkin now-font new-review-form" onSubmit={handleFormSubmit}>
       <ErrorDisplay 
         errors={errors}
       />
@@ -133,7 +133,7 @@ const ReviewForm = (props) => {
           />
         </label>
       </div>
-      <label> body:
+      <label> Body:
         <input 
           name="body"
           id="body"
