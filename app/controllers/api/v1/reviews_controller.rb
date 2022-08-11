@@ -20,7 +20,11 @@ class Api::V1::ReviewsController < ApiController
   def destroy
     review = Review.find(params[:id])
 
-    destroy_review(review)
+    if review.destroy
+      render json: {status: 200}
+    else
+      render json: {error: "Unable to delete this review", status: :not_implemented}
+    end
   end
 
   private 
@@ -39,13 +43,5 @@ class Api::V1::ReviewsController < ApiController
 
   def review_params
     params.require(:review).permit(:title, :rating, :heatIndex, :body)
-  end
-
-  def destroy_review(review)
-    if review.destroy
-      render json: Sauce.find(params[:sauce_id])
-    else
-      render json: {error: "Unable to delete this review", status: :not_implemented}
-    end
   end
 end 

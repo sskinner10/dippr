@@ -72,14 +72,6 @@ const ReviewTile = props =>{
     downvoteSelected = "downvote-selected"
   }
 
-  const errorDisplay = () => {
-    if (error) {
-      return (
-        <p>{error}</p>
-      )
-    }
-  }
-
   const deleteReviewFetch = async () => {
     try {
       const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews/${props.id}`,{
@@ -96,8 +88,10 @@ const ReviewTile = props =>{
         const error = new Error(errorMessage)
         throw(error)
       }
-      const sauceObject = await response.json()
-      props.setSauce(sauceObject.sauce)
+      props.setSauce({
+        ...props.sauce,
+        reviews: props.sauce.reviews.filter(review => review.id != props.id)
+      })
     } catch (error) {
       console.log(`Error in fetch: ${error}`)
     }
@@ -108,12 +102,20 @@ const ReviewTile = props =>{
     deleteReviewFetch()
   }
 
-  const reviewDeleteButton = () => {
-    if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+  let reviewDeleteButton = null
+
+  if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+    reviewDeleteButton = (
+      <button className="button" onClick={deleteReviewClickHandler}>Delete this review</button>
+    )
+  }
+
+  const errorDisplay = () => {
+    if (error) {
       return (
-        <button className="button" onClick={deleteReviewClickHandler}>Delete this review</button>
+        <p>{error}</p>
       )
-    } 
+    }
   }
 
   return(
@@ -121,7 +123,7 @@ const ReviewTile = props =>{
       <div className="">
         <div className="grid-x align-justify">
           <h3 className="review-tile-title-text">{props.title}</h3>
-          {reviewDeleteButton()}
+          {reviewDeleteButton}
         </div>
         <div className="grid-x" >
           <h5 className="cell small-6 medium-4 review-tile-rating-text" > {`Rating: ${props.rating}/5`}</h5>
@@ -143,4 +145,5 @@ const ReviewTile = props =>{
     </div>
   )
 }
+
 export default ReviewTile
