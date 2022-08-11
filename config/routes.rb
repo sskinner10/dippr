@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do 
       resources :sauces, only: [:show] do 
-        resources :reviews, only: [:show, :create]
+        resources :reviews, only: [:create, :destroy]
       end 
       resources :users, only: [:show]
       resources :votes, only: [:create]

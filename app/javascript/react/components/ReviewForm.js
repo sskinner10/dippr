@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React, { useState } from "react"
 import ErrorDisplay from "./ErrorDisplay"
 
@@ -11,7 +12,6 @@ const ReviewForm = (props) => {
   const [errors, setErrors] = useState({})
 
   const postReview = async (formData) =>{
-    
     try {
       const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews`, {
         credentials: "same-origin",
@@ -28,9 +28,11 @@ const ReviewForm = (props) => {
         throw(error)
       }
       const reviewObject = await response.json()
+
       if (reviewObject.review) {
-        setLoginWarning(false)
         appendNewReview(reviewObject.review)
+      } else if (reviewObject.error) {
+        setErrors({'error: ': reviewObject.error})
       }
 
     } catch(error) {
@@ -47,7 +49,7 @@ const ReviewForm = (props) => {
 
   const validForSubmission = () => {
     let submitErrors = {}
-    const requiredFields = ["title", "rating", "heatIndex", "body"]
+    const requiredFields = ["title", "rating", "heatIndex"]
     requiredFields.forEach(field => {
       if (newReview[field].trim() == "") {
         submitErrors = {
@@ -55,9 +57,12 @@ const ReviewForm = (props) => {
           [field]: "cannot be blank"
         }
       }
-      setErrors(submitErrors)
     })
-    return errors
+    if (_.isEmpty(submitErrors)) {
+      return true
+    } 
+    setErrors(submitErrors)
+    return false
   }
 
   const handleFormSubmit = (event) => {

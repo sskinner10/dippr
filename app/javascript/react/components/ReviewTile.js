@@ -7,7 +7,7 @@ library.add(faArrowUp, faArrowDown);
 
 const ReviewTile = props =>{
   const [selectedButton, setSelectedButton] = useState(null)
-  const [reviewKarma, setReviewKarma] = useState(null)
+  const [reviewKarma, setReviewKarma] = useState(0)
   const [error, setError] = useState(null)
 
   const dateString = new Date(props.createdAt).toDateString()
@@ -72,6 +72,44 @@ const ReviewTile = props =>{
     downvoteSelected = "downvote-selected"
   }
 
+  const deleteReviewFetch = async () => {
+    try {
+      const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews/${props.id}`,{
+        credentials: "same-origin",
+        method: "DELETE",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({user_id: props.reviewUserId})
+      }) 
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.status.text})`
+        const error = new Error(errorMessage)
+        throw(error)
+      }
+      props.setSauce({
+        ...props.sauce,
+        reviews: props.sauce.reviews.filter(review => review.id != props.id)
+      })
+    } catch (error) {
+      console.log(`Error in fetch: ${error}`)
+    }
+  }
+
+  const deleteReviewClickHandler = (event) => {
+    event.preventDefault()
+    deleteReviewFetch()
+  }
+
+  let reviewDeleteButton = null
+
+  if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+    reviewDeleteButton = (
+      <button className="button" onClick={deleteReviewClickHandler}>Delete this review</button>
+    )
+  }
+
   const errorDisplay = () => {
     if (error) {
       return (
@@ -83,7 +121,10 @@ const ReviewTile = props =>{
   return(
     <div className="review-tile callout">
       <div className="">
-        <h3 className="review-tile-title-text">{props.title}</h3>
+        <div className="grid-x align-justify">
+          <h3 className="review-tile-title-text">{props.title}</h3>
+          {reviewDeleteButton}
+        </div>
         <div className="grid-x" >
           <h5 className="cell small-6 medium-4 review-tile-rating-text" > {`Rating: ${props.rating}/5`}</h5>
           <h5 className="cell small-6 medium-4 review-tile-rating-text" >{`Heat Index: ${props.heatIndex}/10`}</h5>
@@ -104,4 +145,5 @@ const ReviewTile = props =>{
     </div>
   )
 }
+
 export default ReviewTile
