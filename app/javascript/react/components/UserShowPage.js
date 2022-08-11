@@ -79,7 +79,7 @@ const UserShowPage = (props) => {
             <img src={user.avatar.url} alt= {`${user.dippr_handle}`} className="user-avatar-large" />
             <h4 className="sauce-title-text">{user.dippr_handle}</h4>
             <p className="sauce-title-text">Dipping since {formatDate()}</p>
-            <a className="button secondary edit-button" href={`/users/${user.id}/edit`} > Edit Profile </a>
+            <a className="button secondary edit-button" href={`/users/edit`} > Edit Profile </a>
           </div>
 
           <div className="reviews-index-tile cell small-12 medium-8">
