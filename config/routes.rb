@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   get "/sauces/:id", to: "homes#index"
   get "/users/:id", to: "homes#index"
-  get "/users/:id/edit", to: "devise/registrations#edit"
 
   namespace :api do
     namespace :v1 do 

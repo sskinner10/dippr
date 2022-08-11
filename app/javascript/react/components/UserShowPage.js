@@ -48,7 +48,7 @@ const UserShowPage = (props) => {
       }
       
       return(
-        <div className="review-tile">
+        <div key={review.id} className="review-tile">
           <p className='now-font'> Review left at <Link className="ketchup-text" to={`/sauces/${review.sauce_id}`} > {review.my_sauce.name} </Link>. </p>
           <ReviewTile
             key={review.id}
@@ -79,9 +79,10 @@ const UserShowPage = (props) => {
             <img src={user.avatar.url} alt= {`${user.dippr_handle}`} className="user-avatar-large" />
             <h4 className="sauce-title-text">{user.dippr_handle}</h4>
             <p className="sauce-title-text">Dipping since {formatDate()}</p>
+            <a className="button secondary edit-button" href={`/users/${user.id}/edit`} > Edit Profile </a>
           </div>
 
-          <div className="cell small-12 medium-8">
+          <div className="reviews-index-tile cell small-12 medium-8">
             {reviewTiles}
           </div>
 
