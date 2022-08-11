@@ -1,9 +1,9 @@
 class SaucesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :new]
+  before_action :authenticate_user!, except: [:index]
   before_action :authorize_user, except: [:index, :new, :create]
 
   def index
-    @sauces = Sauce.all
+    @sauces = Sauce.all    
   end
 
   def new

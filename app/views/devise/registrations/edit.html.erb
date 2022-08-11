@@ -1,8 +1,10 @@
 <h2 class="page-header-text" >Edit <%= resource_name.to_s.humanize %></h2>
 
 <div class="form-tile callout" >
-  <h3> <%= current_user.dippr_handle %> </h3>
-  <img class="user-avatar-large" src=<%= current_user.avatar.url %> />
+  <div class="center" >
+    <img class="user-avatar-large" src=<%= current_user.avatar.url %> />
+  </div>
+  <h3 class="now-font text-center" > <%= current_user.dippr_handle %> </h3>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -46,7 +48,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Update" %>
+      <%= f.submit "Update", class: "button secondary" %>
     </div>
   <% end %>
 </div>
@@ -57,4 +59,6 @@
   <p>Can't take the heat? <%= button_to "Get out of the kitchen", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 </div>
 
-<%= link_to "Back", :back, class: "button" %>
+<div class="center" >
+  <%= link_to "Back", :back, class: "button secondary text-center" %>
+</div>
