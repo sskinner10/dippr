@@ -36,6 +36,7 @@ const SauceShowPage = (props) => {
     }
 
     const reviewTiles = sauce.reviews.map((review)=>{
+
       const hasUserVoted = review.votes.filter(vote => vote.user_id === currentUser.id)
       
       let currentUserVote = null
@@ -50,6 +51,7 @@ const SauceShowPage = (props) => {
           id={review.id}
           userAvatar={review.user.avatar.url}
           userHandle={review.user.dippr_handle}
+          reviewUserId={review.user_id}
           title={review.title}
           rating={review.rating}
           heatIndex={review.heatIndex}
@@ -57,6 +59,9 @@ const SauceShowPage = (props) => {
           createdAt={review.created_at}
           totalKarma={review.total_karma}
           currentUserVote={currentUserVote}
+          currentUser={currentUser}
+          sauce={sauce}
+          setSauce={setSauce}
         />
       )  
     })

@@ -7,7 +7,7 @@ library.add(faArrowUp, faArrowDown);
 
 const ReviewTile = props =>{
   const [selectedButton, setSelectedButton] = useState(null)
-  const [reviewKarma, setReviewKarma] = useState(null)
+  const [reviewKarma, setReviewKarma] = useState(0)
   const [error, setError] = useState(null)
 
   const dateString = new Date(props.createdAt).toDateString()
@@ -72,6 +72,44 @@ const ReviewTile = props =>{
     downvoteSelected = "downvote-selected"
   }
 
+  const deleteReviewFetch = async () => {
+    try {
+      const response = await fetch(`/api/v1/sauces/${props.sauce.id}/reviews/${props.id}`,{
+        credentials: "same-origin",
+        method: "DELETE",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({user_id: props.reviewUserId})
+      }) 
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.status.text})`
+        const error = new Error(errorMessage)
+        throw(error)
+      }
+      props.setSauce({
+        ...props.sauce,
+        reviews: props.sauce.reviews.filter(review => review.id != props.id)
+      })
+    } catch (error) {
+      console.log(`Error in fetch: ${error}`)
+    }
+  }
+
+  const deleteReviewClickHandler = (event) => {
+    event.preventDefault()
+    deleteReviewFetch()
+  }
+
+  let reviewDeleteButton = null
+
+  if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+    reviewDeleteButton = (
+      <button className="button alert expanded" onClick={deleteReviewClickHandler}>Delete this review</button>
+    )
+  }
+
   const errorDisplay = () => {
     if (error) {
       return (
@@ -85,6 +123,10 @@ const ReviewTile = props =>{
       <div className="grid-x">
         <div className="cell small-3 medium-2 review-poster-avatar" >
           <img className="user-avatar-small" src={`${props.userAvatar}`} />
+        </div>
+        <div className="grid-x" >
+          <h5 className="cell small-6 medium-4 review-tile-rating-text" > {`Rating: ${props.rating}/5`}</h5>
+          <h5 className="cell small-6 medium-4 review-tile-rating-text" >{`Heat Index: ${props.heatIndex}/10`}</h5>
         </div>
         <div className="cell auto " >
           <h3 className="review-tile-title-text now-font"><strong>{props.title}</strong></h3>
@@ -108,8 +150,12 @@ const ReviewTile = props =>{
         <div className="error-display">
           {errorDisplay()}
         </div>
+        <div>
+          {reviewDeleteButton}
+        </div>
       </div>
     </div>
   )
 }
+
 export default ReviewTile
