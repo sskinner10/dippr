@@ -1,7 +1,9 @@
 class Sauce < ApplicationRecord
+  mount_uploader :image_url, SauceImageUploader
+
   validates :name, presence: true
   validates :brand, presence: true
-  validates :image_url, presence: true, url: true
+  validates :image_url, presence: true
   validates :name, uniqueness: { scope: :brand }
 
   extend FriendlyId
@@ -22,5 +24,9 @@ class Sauce < ApplicationRecord
       avg = ((self.reviews.sum(:rating).to_f) / self.reviews.length).round(1)
       return "Average rating: #{avg} / 5.0"
     end
+  end
+
+  def sauce_image
+    self.image_url.url
   end
 end

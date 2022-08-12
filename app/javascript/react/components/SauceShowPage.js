@@ -95,7 +95,7 @@ const SauceShowPage = (props) => {
           
           <div className="now-font sauce-show-tile cell small-12 medium-4"> 
             <div className='sauce-show-image-wrapper' >
-              <img className="sauce-show-image" src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
+              <img className="sauce-show-image" src={sauce.sauce_image} alt={`${sauce.name} (${sauce.brand})`} />
             </div>
             <h3 className="now-font sauce-card-title ketchup-text" ><strong> {sauce.name} </strong></h3>
             <h4 className="now-font sauce-card-subtitle ketchup-text" ><strong> ({sauce.brand}) </strong></h4>

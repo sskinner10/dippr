@@ -14,7 +14,7 @@
 
       <div class='sauce-index-cell callout cell small-12 medium-6 large-4 napkin'>
         <a href=<%="/sauces/#{sauce.slug}"%>>
-          <%= image_tag sauce.image_url, class: "sauce-card-image" %>
+          <%= image_tag sauce.sauce_image, class: "sauce-card-image" %>
           <h3 class="sauce-card-title ketchup-text" > <strong><%= sauce.name %></strong> </h3>
           <h4 class="ketchup-text sauce-card-title" > (<%= sauce.brand %>) </h4>
           <p class="now-font ketchup-text" ><%= sauce.average_rating_text %></p>

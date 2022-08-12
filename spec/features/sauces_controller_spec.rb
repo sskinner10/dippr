@@ -15,7 +15,7 @@ RSpec.describe Api::V1::SaucesController, type: :controller do
 
       expect(returned_json['sauce']['name']).to eq "Ketchup"
       expect(returned_json['sauce']['brand']).to eq "Heinz"
-      expect(returned_json['sauce']['image_url']).to eq "https://m.media-amazon.com/images/I/71szc59Y0aL._SL1500_.jpg"
+      expect(returned_json['sauce']['sauce_image']).to eq "/uploads/sauce/image_url/8/unicorn.jpeg"
       expect(returned_json['sauce']['description']).to eq "a tasty, tomato based sauce"
 
       expect(returned_json['sauce']['reviews'][0]['title']).to eq "Delicious sauce"
