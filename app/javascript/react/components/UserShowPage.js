@@ -67,7 +67,6 @@ const UserShowPage = (props) => {
             sauce={review.my_sauce}
             setSauce={setSauce}
           />
-          {/* <hr/> */}
         </div>
       )  
     })
