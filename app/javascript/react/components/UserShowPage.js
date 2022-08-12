@@ -11,18 +11,19 @@ const UserShowPage = (props) => {
     }, [])
 
     const fetchUser = async () => {
-        try {
-            const response = await fetch(`/api/v1/users/${props.match.params.id}`)
-            if (!response.ok){
-                const errorMessage = `${response.status} (${response.statusText})`
-                const error = new Error (errorMessage)
-                throw(error)
-            }
-            const userObject = await response.json()
-            setUser(userObject.user)
-        } catch (error){
-            console.error(`Error in fetch: ${error.message}`)
-        }
+      try {
+          const response = await fetch(`/api/v1/users/${props.match.params.id}`)
+          if (!response.ok){
+              const errorMessage = `${response.status} (${response.statusText})`
+              const error = new Error (errorMessage)
+              throw(error)
+          }
+          const userObject = await response.json()
+          setUser(userObject.user)
+          setCurrentUser(userObject.user.current_user)
+      } catch (error){
+          console.error(`Error in fetch: ${error.message}`)
+      }
     }
 
     if (_.isEmpty(user)) {
@@ -33,42 +34,44 @@ const UserShowPage = (props) => {
         return new Date(user.created_at).toDateString()
     }
 
-    const setSauce = (sauce) => {
-      console.log(sauce)
+    const resetReviews = () => {
+      fetchUser()
     }
 
     const reviewTiles = user.reviews.map((review)=>{
 
-      const hasUserVoted = review.votes.filter(vote => vote.user_id === user.id)
-      
-      let currentUserVote = null
-      
-      if (hasUserVoted.length > 0) {
-        currentUserVote = hasUserVoted.at(0).vote_type
+      if (review) {
+        const hasUserVoted = review.votes.filter(vote => vote.user_id === user.id)
+        
+        let currentUserVote = null
+        
+        if (hasUserVoted.length > 0) {
+          currentUserVote = hasUserVoted.at(0).vote_type
+        }
+        
+        return(
+          <div key={review.id} className="review-tile">
+            <p className='now-font'> Review left at <Link className="ketchup-text" to={`/sauces/${review.my_sauce.slug}`} > {review.my_sauce.name} </Link>. </p>
+            <ReviewTile
+              key={review.id}
+              id={review.id}
+              userAvatar={review.user.avatar.url}
+              userHandle={review.user.dippr_handle}
+              reviewUserId={review.user_id}
+              title={review.title}
+              rating={review.rating}
+              heatIndex={review.heatIndex}
+              body={review.body}
+              createdAt={review.created_at}
+              totalKarma={review.total_karma}
+              currentUserVote={currentUserVote}
+              currentUser={user}
+              sauce={review.my_sauce}
+              setSauce={resetReviews}
+            />
+          </div>
+        )  
       }
-      
-      return(
-        <div key={review.id} className="review-tile">
-          <p className='now-font'> Review left at <Link className="ketchup-text" to={`/sauces/${review.my_sauce.id}`} > {review.my_sauce.name} </Link>. </p>
-          <ReviewTile
-            key={review.id}
-            id={review.id}
-            userAvatar={review.user.avatar.url}
-            userHandle={review.user.dippr_handle}
-            reviewUserId={review.user_id}
-            title={review.title}
-            rating={review.rating}
-            heatIndex={review.heatIndex}
-            body={review.body}
-            createdAt={review.created_at}
-            totalKarma={review.total_karma}
-            currentUserVote={currentUserVote}
-            currentUser={user}
-            sauce={review.my_sauce}
-            setSauce={setSauce}
-          />
-        </div>
-      )  
     })
     
     return (

@@ -89,10 +89,14 @@ const ReviewTile = props =>{
         const error = new Error(errorMessage)
         throw(error)
       }
-      props.setSauce({
-        ...props.sauce,
-        reviews: props.sauce.reviews.filter(review => review.id != props.id)
-      })
+      if (props.sauce.reviews) {
+        props.setSauce({
+          ...props.sauce,
+          reviews: props.sauce.reviews.filter(review => review.id != props.id)
+        })
+      } else {
+        props.setSauce()
+      }
     } catch (error) {
       console.log(`Error in fetch: ${error}`)
     }
@@ -105,10 +109,12 @@ const ReviewTile = props =>{
 
   let reviewDeleteButton = null
 
-  if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
-    reviewDeleteButton = (
-      <button className="button alert expanded" onClick={deleteReviewClickHandler}>Delete this review</button>
-    )
+  if (props.sauce.reviews) {
+    if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+      reviewDeleteButton = (
+        <button className="button alert expanded" onClick={deleteReviewClickHandler}>Delete this review</button>
+      )
+    }
   }
 
   const errorDisplay = () => {
