@@ -6,11 +6,12 @@ import ReviewTile from './ReviewTile'
 const SauceShowPage = (props) => {
     const [sauce, setSauce] = useState({})
     const [currentUser, setCurrentUser] = useState({})
+    const [reviewFormExpanded, setReviewFormExpanded] = useState(false)
     
     useEffect(() => {
       fetchSauce()
     }, [])
-
+    
     const fetchSauce = async () => {
       try {
         const response = await fetch(`/api/v1/sauces/${props.match.params.id}`)
@@ -48,6 +49,8 @@ const SauceShowPage = (props) => {
         <ReviewTile
           key={review.id}
           id={review.id}
+          userAvatar={review.user.avatar.url}
+          userHandle={review.user.dippr_handle}
           reviewUserId={review.user_id}
           title={review.title}
           rating={review.rating}
@@ -63,22 +66,51 @@ const SauceShowPage = (props) => {
       )  
     })
     
+    let sauceDescription = sauce.description
+    if (sauceDescription == "") {
+      sauceDescription = "No description provided"
+    }
+
+    const reviewFormShowing = () => {
+      if (reviewFormExpanded) {
+        return (
+          <ReviewForm setSauce={setSauce} sauce={sauce} setReviewFormExpanded={setReviewFormExpanded} />
+        )
+      } else {
+        return (
+          <div className='new-review-button'>
+            <div className='button secondary expanded rounded' onClick={expandForm}> Leave a Review for this Sauce </div>
+          </div>
+        )
+      }
+    }
+
+    const expandForm = () => {
+      setReviewFormExpanded(true)
+    }
+    
     return(
       <div className="grid-container">
-        <div className="grid-x">
+        <div className="sauce-show-container grid-x grid-margin-x">
           
-          <div className="sauce-show-tile cell small-12 medium-4"> 
-            <img src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
-            <h5 className="sauce-title-text">{sauce.name} ({sauce.brand})</h5>
-            <p>{sauce.description}</p>
+          <div className="now-font sauce-show-tile cell small-12 medium-4"> 
+            <div className='sauce-show-image-wrapper' >
+              <img className="sauce-show-image" src={sauce.image_url} alt={`${sauce.name} (${sauce.brand})`} />
+            </div>
+            <h3 className="now-font sauce-card-title ketchup-text" ><strong> {sauce.name} </strong></h3>
+            <h4 className="now-font sauce-card-subtitle ketchup-text" ><strong> ({sauce.brand}) </strong></h4>
+        
+            <p className='sauce-show-description-container callout'>{sauceDescription}</p>
           </div>
           
           <div className='reviews-index-tile cell small-12 medium-8'>
+            <hr/>
             <div> 
-              <ReviewForm setSauce={setSauce} sauce={sauce} />
+              {reviewFormShowing()}
             </div>
-            
-            <div className='cell small-12 medium-8 large-7'>Review form
+            <hr></hr>
+            <div className='cell small-12 medium-8 large-7'>
+              <h3 className='now-font'> Reviews: </h3>
               <div>
                 {reviewTiles}          
               </div>

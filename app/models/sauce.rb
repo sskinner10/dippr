@@ -14,4 +14,13 @@ class Sauce < ApplicationRecord
       [:name, :brand]
     ]
   end
+
+  def average_rating_text
+    if self.reviews.length == 0
+      return "No Reviews Yet"
+    else
+      avg = ((self.reviews.sum(:rating).to_f) / self.reviews.length).round(1)
+      return "Average rating: #{avg} / 5.0"
+    end
+  end
 end

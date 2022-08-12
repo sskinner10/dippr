@@ -13,4 +13,8 @@ class Review < ApplicationRecord
   def total_karma
     self.votes.sum(:vote_type)
   end
+
+  def my_sauce
+    self.sauce
+  end
 end

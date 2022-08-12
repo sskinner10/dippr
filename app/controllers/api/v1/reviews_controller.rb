@@ -10,7 +10,7 @@ class Api::V1::ReviewsController < ApiController
 
     if review.save
       votes = review.votes
-      payload = {**review.attributes, votes: votes}
+      payload = {**review.attributes, votes: votes, user: current_user}
       render json: {review: payload}
     else 
       render json: {error: review.errors.full_messages, status: :unprocessable_entity }
