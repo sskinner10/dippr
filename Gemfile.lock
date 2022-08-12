@@ -122,6 +122,8 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0)
       sprockets-es6 (>= 0.9.0)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -302,6 +304,7 @@ DEPENDENCIES
   factory_bot
   fog-aws
   foundation-rails (~> 6.5)
+  friendly_id (~> 5.2)
   jbuilder (~> 2.5)
   jquery-rails
   launchy
