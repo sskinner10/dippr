@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
   def show
-    render json: User.find(params[:id])
+    render json: User.friendly.find(params[:id])
   end
 end
