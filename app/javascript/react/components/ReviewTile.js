@@ -89,10 +89,14 @@ const ReviewTile = props =>{
         const error = new Error(errorMessage)
         throw(error)
       }
-      props.setSauce({
-        ...props.sauce,
-        reviews: props.sauce.reviews.filter(review => review.id != props.id)
-      })
+      if (props.sauce.reviews) {
+        props.setSauce({
+          ...props.sauce,
+          reviews: props.sauce.reviews.filter(review => review.id != props.id)
+        })
+      } else {
+        props.setSauce()
+      }
     } catch (error) {
       console.log(`Error in fetch: ${error}`)
     }
