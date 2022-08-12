@@ -5,7 +5,6 @@ import ReviewTile from "./ReviewTile";
 
 const UserShowPage = (props) => {
     const [user, setUser] = useState({})
-    const [currentUser, setCurrentUser] = useState({})
     
     useEffect(() =>{
         fetchUser()
@@ -66,7 +65,7 @@ const UserShowPage = (props) => {
               createdAt={review.created_at}
               totalKarma={review.total_karma}
               currentUserVote={currentUserVote}
-              currentUser={currentUser}
+              currentUser={user}
               sauce={review.my_sauce}
               setSauce={resetReviews}
             />
