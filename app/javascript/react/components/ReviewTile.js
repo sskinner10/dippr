@@ -109,10 +109,12 @@ const ReviewTile = props =>{
 
   let reviewDeleteButton = null
 
-  if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
-    reviewDeleteButton = (
-      <button className="button alert expanded" onClick={deleteReviewClickHandler}>Delete this review</button>
-    )
+  if (props.sauce.reviews) {
+    if (props.currentUser.role === 'admin' || props.currentUser.id === props.reviewUserId) {
+      reviewDeleteButton = (
+        <button className="button alert expanded" onClick={deleteReviewClickHandler}>Delete this review</button>
+      )
+    }
   }
 
   const errorDisplay = () => {
