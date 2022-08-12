@@ -11,7 +11,7 @@ const SauceShowPage = (props) => {
     useEffect(() => {
       fetchSauce()
     }, [])
-    
+
     const fetchSauce = async () => {
       try {
         const response = await fetch(`/api/v1/sauces/${props.match.params.id}`)
@@ -79,7 +79,7 @@ const SauceShowPage = (props) => {
       } else {
         return (
           <div className='new-review-button'>
-            <div className='button secondary expanded rounded' onClick={expandForm}> Leave a Review for this Sauce </div>
+            <div className='button secondary expanded rounded mayo-text bold' onClick={expandForm}> Leave a Review for this Sauce </div>
           </div>
         )
       }

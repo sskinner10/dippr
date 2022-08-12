@@ -13,13 +13,13 @@
     <%= f.label :description, class: "form-label-text" %>
     <%= f.text_field :description %>
     
-		<div class="button-group" >
-			<%= f.submit class: "button" %>
+		<div class="button-group now-font" >
+			<%= f.submit class: "button success" %>
 			<%= link_to "Obliterate this Sauce", sauce_path(@sauce), method: "DELETE", class: "button alert" %>
 		</div>
 
   <% end %>
 
   <br>
-  <%= link_to 'Back to Sauces', sauces_path %>
+  <%= link_to 'Back to Sauces', sauces_path, class: "ketchup-text" %>
 </div>

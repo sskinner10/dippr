@@ -134,7 +134,9 @@ const ReviewForm = (props) => {
         </label>
       </div>
       <label> Body:
-        <input 
+        <textarea
+          rows={4}
+          cols={50} 
           name="body"
           id="body"
           type="text"

@@ -141,10 +141,10 @@ const ReviewTile = props =>{
       </div>
       <div>
         <div className="grid-x review-footer" >
-          <FontAwesomeIcon id="upvote" onClick={karmaClickHandler} className={`${upvoteSelected} cell small-1 vote-arrows`} icon="fa-solid fa-arrow-up" />
+          <FontAwesomeIcon id="upvote" onClick={karmaClickHandler} className={`${upvoteSelected} cell small-1 vote-arrows upvote`} icon="fa-solid fa-arrow-up" />
           <span className="cell small-1 text-center">{reviewKarma}</span>
-          <FontAwesomeIcon id="downvote" onClick={karmaClickHandler} className={`${downvoteSelected} cell small-1 vote-arrows`} icon="fa-solid fa-arrow-down" />  
-          <p className="date-text cell auto text-right"> {dateString} </p>
+          <FontAwesomeIcon id="downvote" onClick={karmaClickHandler} className={`${downvoteSelected} cell small-1 vote-arrows downvote`} icon="fa-solid fa-arrow-down" />  
+          <p className="date-text cell auto text-right"><i> {dateString} </i></p>
         </div>
         <div className="error-display">
           {errorDisplay()}
