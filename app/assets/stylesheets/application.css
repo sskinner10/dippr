@@ -43,7 +43,7 @@
 }
 
 .user-profile-tile {
-    margin: 0% 15%;
+    margin: 5%;
     margin-top: 1em;
 }
 
@@ -77,10 +77,19 @@
     font-style: normal;
 }
 
+.upvote:hover {
+    background-color: #60c86052;
+}
+
+.downvote:hover {
+    background-color: #ce0f0f57;
+}
+
 .vote-arrows {
     margin-top: 0.25em;
     border: 1px solid black;
     border-radius: 1em;
+    padding: 2px;
 }
 
 .upvote-selected {
@@ -175,8 +184,6 @@
 .mayo-text {
     color: #fff7e0;
     font-family: 'NowRegular';
-    font-weight: normal;
-    font-style: normal;
 }
 
 .mayo {
@@ -192,9 +199,14 @@
     font-weight: bold;
 }
 
-.top-bar-user-text {
+.top-bar-text-wrapper {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.top-bar-text {
+    font-size: 1.25em;
+    font-weight: 600;
 }
 
 .new-review-button {
@@ -226,4 +238,8 @@
     max-width: 50%;
     text-align: center;
     margin: auto;
+}
+
+.bold {
+    font-weight: 700;
 }

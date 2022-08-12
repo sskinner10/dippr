@@ -73,7 +73,7 @@ const UserShowPage = (props) => {
     
     return (
       <div className="user-profile-tile callout grid-container">
-        <div className="grid-x">
+        <div className="grid-x grid-margin-x">
 
           <div className="cell small-12 medium-4">
             <div className="center" >
