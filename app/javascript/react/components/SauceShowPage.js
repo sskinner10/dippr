@@ -11,7 +11,7 @@ const SauceShowPage = (props) => {
     useEffect(() => {
       fetchSauce()
     }, [])
-
+    
     const fetchSauce = async () => {
       try {
         const response = await fetch(`/api/v1/sauces/${props.match.params.id}`)
@@ -65,7 +65,7 @@ const SauceShowPage = (props) => {
         />
       )  
     })
-
+    
     let sauceDescription = sauce.description
     if (sauceDescription == "") {
       sauceDescription = "No description provided"
