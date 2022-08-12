@@ -58,3 +58,4 @@ gem 'webpacker', '~> 3.3'
 gem "fog-aws"
 gem 'carrierwave', '~> 2.0'
 gem "active_model_serializers"
+gem "friendly_id", '~> 5.2'
