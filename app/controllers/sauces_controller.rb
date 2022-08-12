@@ -42,6 +42,10 @@ class SaucesController < ApplicationController
     @sauce = Sauce.friendly.find(params[:id])
 
     if @sauce.destroy
+      reviews = Review.where(sauce: @sauce)
+      Vote.where(review: reviews).delete_all
+      reviews.destroy_all
+      
       flash[:notice] = "Sauce obliterated. The sauce is lost."
       redirect_to sauces_path
     else
