@@ -23,11 +23,11 @@ class SaucesController < ApplicationController
   end
 
   def edit
-    @sauce = Sauce.find(params[:id])
+    @sauce = Sauce.friendly.find(params[:id])
   end
 
   def update
-    @sauce = Sauce.find(params[:id])
+    @sauce = Sauce.friendly.find(params[:id])
 
     if @sauce.update(sauce_params)
       flash[:notice] = "Sauce updated successfully"
@@ -39,7 +39,7 @@ class SaucesController < ApplicationController
   end
 
   def destroy
-    @sauce = Sauce.find(params[:id])
+    @sauce = Sauce.friendly.find(params[:id])
 
     if @sauce.destroy
       flash[:notice] = "Sauce obliterated. The sauce is lost."
